@@ -40,5 +40,5 @@ $ java -cp ./com.ibm.mq.allclient-9.3.0.0.jar:./javax.jms-api-2.0.1.jar:./json-2
 5- run the sample Java code:
 
 ```sh
-$ java -Djavax.net.debug=ssl -Djavax.net.ssl.trustStore=/Users/hmohamed/temp/MQClient/example-qm.p12 -Djavax.net.ssl.trustStorePassword=passw0rd -Djavax.net.ssl.keyStore=/Users/hmohamed/temp/MQClient/example-app1.p12 -Djavax.net.ssl.keyStorePassword=passw0rd  -cp ./com.ibm.mq.allclient-9.3.0.0.jar:./javax.jms-api-2.0.1.jar:./json-20220320.jar:. com.ibm.mq.samples.jms.JmsPutGet
+$ java -Djavax.net.debug=ssl -Djavax.net.ssl.trustStore=./example-qm.p12 -Djavax.net.ssl.trustStorePassword=passw0rd -Djavax.net.ssl.keyStore=./example-app1.p12 -Djavax.net.ssl.keyStorePassword=passw0rd  -cp ./com.ibm.mq.allclient-9.3.0.0.jar:./javax.jms-api-2.0.1.jar:./json-20220320.jar:. com.ibm.mq.samples.jms.JmsPutGet
 ```
