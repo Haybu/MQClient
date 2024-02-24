@@ -6,7 +6,10 @@
 
 3- create these Openshift resources. Note, these resources will be created in `cp4i` namespace in case of a single-namespace mode. For all_namespaces mode, you may need to created a new namespace and change the namespace references in these resource YAML files.
 
-    a- create a secret using `create-secret.sh` file
+    a- create a secret using this command
+    ```sh
+    $ ./create-secret.sh
+    ```
     
     b- create a configmap using this command 
     ```sh
