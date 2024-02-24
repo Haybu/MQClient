@@ -10,6 +10,7 @@
     ```sh
     $ ./create-secret.sh
     ```
+
     
     b- create a configmap using this command 
     ```sh
