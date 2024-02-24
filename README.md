@@ -8,9 +8,9 @@
 
     a- create a secret using this command:
 
-    ```sh
-    $ ./create-secret.sh
-    ```
+```sh
+$ ./create-secret.sh
+```
 
     
     b- create a configmap using this command:
