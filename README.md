@@ -6,23 +6,23 @@
 
 3- create these Openshift resources. Note, these resources will be created in `cp4i` namespace in case of a single-namespace mode. For all_namespaces mode, you may need to created a new namespace and change the namespace references in these resource YAML files.
 
-    a- create a secret using this command
+    a- create a secret using this command:
     ```sh
     $ ./create-secret.sh
     ```
 
     
-    b- create a configmap using this command 
+    b- create a configmap using this command:
     ```sh
     $ oc create -f ./configmap.yml
     ```
 
-    c- create a queue manager instance using this command. Note, you may need to change the licencse, etc.
+    c- create a queue manager instance using this command. Note, you may need to change the licencse, etc:
     ```sh
     $ oc create -f ./qm.yml    
     ```
 
-    d- create Openshift route using this command
+    d- create Openshift route using this command:
     ```sh
     $ oc create -f ./route.yml
     ```
