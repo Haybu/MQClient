@@ -8,7 +8,7 @@
 
     a- create a secret using this command:
 
-    ```sh
+    ```
     $ ./create-secret.sh
     ```
 
