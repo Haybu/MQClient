@@ -1,18 +1,27 @@
 # Configure IBM MQ with Mutual SSL and Test with a Sample Java App
 
-1- Follow the steps to create MQ server and client SSL certificates
+1- Follow the steps in `create-certs.sh` file to create MQ server and client SSL keys and certificates.
 
 2- login to Openshift cluster in your terminal.
 
 3- create these Openshift resources. Note, these resources will be created in `cp4i` namespace in case of a single-namespace mode. For all_namespaces mode, you may need to created a new namespace and change the namespace references in these resource YAML files.
 
-    a- create-secret.sh
+    a- create a secret using `create-secret.sh` file
     
-    b- oc create -f ./configmap.yml
+    b- create a configmap using this command 
+    ```sh
+    $ oc create -f ./configmap.yml
+    ```
 
-    c- oc create -f ./qm.yml    # note you may need to change the licencse, etc.
+    c- create a queue manager instance using this command. Note, you may need to change the licencse, etc.
+    ```sh
+    $ oc create -f ./qm.yml    
+    ```
 
-    d- oc create -f ./route.yml
+    d- create Openshift route using this command
+    ```sh
+    $ oc create -f ./route.yml
+    ```
 
 4- compile the sample Java code:
 ```sh
