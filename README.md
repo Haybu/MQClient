@@ -15,21 +15,21 @@ $ ./create-secret.sh
     
     b- create a configmap using this command:
 
-    ```sh
-    $ oc create -f ./configmap.yml
-    ```
+```sh
+$ oc create -f ./configmap.yml
+```
 
     c- create a queue manager instance using this command. Note, you may need to change the licencse, etc.
 
-    ```sh
-    $ oc create -f ./qm.yml    
-    ```
+```sh
+$ oc create -f ./qm.yml    
+```
 
     d- create Openshift route using this command:
 
-    ```sh
-    $ oc create -f ./route.yml
-    ```
+```sh
+$ oc create -f ./route.yml
+```
 
 4- compile the sample Java code:
 
