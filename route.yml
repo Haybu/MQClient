@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: examplemq-route
+  namespace: cp4i
+spec:
+  host: mtlsqmchl.chl.mq.apps.daffy-sy1zj7y5.cloud.techzone.ibm.com
+  to:
+    kind: Service
+    name: exampleqm-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
+
+

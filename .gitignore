@@ -1,0 +1,12 @@
+/FFDC/*
+/FFDC
+*/FFDC/*
+*/FFDC
+FFDC/
+FFDC/*
+*.p12
+*.jks
+*.crt
+*.csr
+*.key
+com/ibm/mq/samples/jms/JmsPutGet.class

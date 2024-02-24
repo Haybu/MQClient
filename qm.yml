@@ -1,0 +1,87 @@
+### Create Queue Manager CRD
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: exampleqm
+  namespace: cp4i
+spec:
+  license:
+    accept: true
+    license: L-VTPK-22YZPK
+    use: Production
+  queueManager:
+    metrics:
+      enabled: true
+    route:
+      enabled: true  
+    name: EXAMPLEQM
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    readinessProbe:
+      failureThreshold: 1
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 3
+    livenessProbe:
+      failureThreshold: 1
+      initialDelaySeconds: 90
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    debug: false
+    logFormat: Basic
+    availability:
+      type: SingleInstance
+      updateStrategy: RollingUpdate
+    storage:
+      defaultClass: ocs-storagecluster-ceph-rbd
+      persistedData:
+        enabled: false
+      queueManager:
+        size: 2Gi
+        type: persistent-claim
+      recoveryLogs:
+        enabled: false
+    imagePullPolicy: IfNotPresent        
+    mqsc:
+    - configMap:
+        name: example-tls-configmap
+        items:
+        - example-tls.mqsc
+    ini:
+    - configMap:
+        name: example-tls-configmap
+        items:
+        - example-tls.ini
+  version: 9.3.4.0-r1
+  web:
+    console:
+      authentication:
+        provider: integration-keycloak
+      authorization:
+        provider: integration-keycloak
+    enabled: true
+  pki:
+    keys:
+      - name: default
+        secret:
+          secretName: example-qm-tls
+          namespace: cp4i
+          items:
+            - tls.key
+            - tls.crt
+            - ca.crt
+    trust:
+      - name: mtlsqmchl
+        secret:
+          secretName: example-qm-tls
+          namespace: cp4i
+          items:
+            - example-app1.p12
+
