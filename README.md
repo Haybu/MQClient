@@ -1,6 +1,6 @@
 # Configure IBM MQ with Mutual SSL and Test with a Sample Java App
 
-1- Follow the steps in `create-certs.sh` file to create MQ server and client SSL keys and certificates.
+1- Follow the steps in `create-certs.sh` file to create MQ server and client SSL self-signed certificates and private keys.
 
 2- login to Openshift cluster in your terminal.
 
