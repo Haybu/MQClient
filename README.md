@@ -42,3 +42,7 @@ $ java -cp ./com.ibm.mq.allclient-9.3.0.0.jar:./javax.jms-api-2.0.1.jar:./json-2
 ```sh
 $ java -Djavax.net.debug=ssl -Djavax.net.ssl.trustStore=./example-qm.p12 -Djavax.net.ssl.trustStorePassword=passw0rd -Djavax.net.ssl.keyStore=./example-app1.p12 -Djavax.net.ssl.keyStorePassword=passw0rd  -cp ./com.ibm.mq.allclient-9.3.0.0.jar:./javax.jms-api-2.0.1.jar:./json-20220320.jar:. com.ibm.mq.samples.jms.JmsPutGet
 ```
+
+
+You can follow the same steps with the provided simple Java example `mq.samples.jms.JmsPutFile` to publish a file content. You 
+need to change the `filePath` variable in the code to point to the file location.

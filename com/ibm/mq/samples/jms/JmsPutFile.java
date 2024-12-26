@@ -16,17 +16,16 @@
 
 package com.ibm.mq.samples.jms;
 
-import java.io.Console;
-import javax.jms.Destination;
-import javax.jms.JMSConsumer;
-import javax.jms.JMSContext;
-import javax.jms.JMSException;
-import javax.jms.JMSProducer;
-import javax.jms.TextMessage;
-
 import com.ibm.msg.client.jms.JmsConnectionFactory;
 import com.ibm.msg.client.jms.JmsFactoryFactory;
 import com.ibm.msg.client.wmq.WMQConstants;
+
+import javax.jms.*;
+import java.io.Console;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * A minimal and simple application for Point-to-point messaging.
@@ -48,7 +47,7 @@ import com.ibm.msg.client.wmq.WMQConstants;
  * JNDI in use: No
  *
  */
-public class JmsPutGet {
+public class JmsPutFile {
 
 	// System exit status value (assume unset value to be 1)
 	private static int status = 1;
@@ -82,8 +81,7 @@ public class JmsPutGet {
 		Destination destination = null;
 		JMSProducer producer = null;
 		JMSConsumer consumer = null;
-
-
+		String filePath = "path/to/your/file.txt";
 
 		try {
 			// Create a connection factory
@@ -106,13 +104,23 @@ public class JmsPutGet {
 			context = cf.createContext();
 			destination = context.createQueue("queue:///" + QUEUE_NAME);
 
-			long uniqueNumber = System.currentTimeMillis() % 1000;
-			TextMessage message = context.createTextMessage("Your lucky number today is " + uniqueNumber);
+			// Read the file content into a byte array
+			File file = new File(filePath);
+			byte[] fileContent = new byte[(int) file.length()];
+			try (FileInputStream fis = new FileInputStream(file)) {
+				fis.read(fileContent);
+			}
 
+			// Create a message
+			BytesMessage message = session.createBytesMessage();
+			message.writeBytes(fileContent);
+
+			// publish
 			producer = context.createProducer();
 			producer.send(destination, message);
 			System.out.println("Sent message:\n" + message);
 
+			// consume
 			consumer = context.createConsumer(destination); // autoclosable
 			String receivedMessage = consumer.receiveBody(String.class, 15000); // in ms or 15 seconds
 
@@ -121,8 +129,8 @@ public class JmsPutGet {
             context.close();
 
 			recordSuccess();
-		} catch (JMSException jmsex) {
-			recordFailure(jmsex);
+		} catch (JMSException | IOException e) {
+			recordFailure(e);
 		}
 
 		System.exit(status);
@@ -147,7 +155,8 @@ public class JmsPutGet {
 			if (ex instanceof JMSException) {
 				processJMSException((JMSException) ex);
 			} else {
-				System.out.println(ex);
+				//System.out.println(ex);
+				ex.printStackTrace();
 			}
 		}
 		System.out.println("FAILURE");
