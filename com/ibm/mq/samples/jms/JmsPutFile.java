@@ -112,20 +112,15 @@ public class JmsPutFile {
 			}
 
 			// Create a message
-			BytesMessage message = session.createBytesMessage();
+			BytesMessage message = context.createBytesMessage();
 			message.writeBytes(fileContent);
 
 			// publish
 			producer = context.createProducer();
 			producer.send(destination, message);
-			System.out.println("Sent message:\n" + message);
+			System.out.println("File published to topic: " + QUEUE_NAME);
 
-			// consume
-			consumer = context.createConsumer(destination); // autoclosable
-			String receivedMessage = consumer.receiveBody(String.class, 15000); // in ms or 15 seconds
-
-			System.out.println("\nReceived message:\n" + receivedMessage);
-
+			producer.close();
             context.close();
 
 			recordSuccess();
